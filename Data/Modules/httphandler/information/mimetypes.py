@@ -1,0 +1,41 @@
+mimetypes = {
+    ''     : '',
+
+    'txt'  : 'text/plain',
+    'html' : 'text/html',
+    'htm'  : 'text/html',
+    'css'  : 'text/css',
+    'csv'  : 'text/csv',
+    'ics'  : 'text/calendar',
+    'js'   : 'text/javascript',
+    'mjs'  : 'text/javascript',
+    'xml'  : 'text/xml',
+
+    'bmp'  : 'image/bmp',
+    'gif'  : 'image/gif',
+    'ico'  : 'image/vnd.microsoft.icon',
+    'jpg'  : 'image/jpeg',
+    'jpeg' : 'image/jpeg',
+    'png'  : 'image/png',
+    'svg'  : 'image/svg+xml',
+    'tif'  : 'image/tiff',
+    'tiff' : 'image/tiff',
+    'webp' : 'image/webp',
+
+    'aac'  : 'audio/aac',
+    'mid'  : 'audio/midi',
+    'midi' : 'audio/midi',
+    'mp3'  : 'audio/mpeg',
+    'oga'  : 'audio/ogg',
+    'opus' : 'audio/opus',
+    'wav'  : 'audio/wav',
+    'weba' : 'audio/webm',
+
+    'avi'  : 'video/x-msvideo',
+    'mpeg' : 'video/mpeg',
+    'ogv'  : 'video/ogg',
+    'ts'   : 'video/mp2t',
+    'webm' : 'video/webm',
+    '3gp'  : 'video/3gpp',
+    '3g2'  : 'video/3gpp2'
+}
