@@ -1,8 +1,10 @@
 import socket
 import threading
+import re
 
 from Modules.httphandler.httprequest import httprequest
 from Modules.httphandler.httpresponse import httpresponse
+from Modules.httphandler.information.methods import methods
 
 def baseresponse(request, response):
     basebody = """
@@ -13,22 +15,36 @@ def baseresponse(request, response):
     <h1>Route Not Defined</h1>
     """
 
-    response.setheader(
-        {
-            'Content-Length':str(len(basebody)),
-            'Content-Type':'text/html; text/xml'
-        }
-    )
-    response.setbody(basebody)
+    response.xml(basebody)
+
+def methodnotallowed(request, response):
+    basebody = """
+    <style>
+    * {padding:0px;margin:0px;font-family:Helvetica;font-weight:normal;font-size:50px;}
+    h1 {width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+    </style>
+    <h1>Method Not Allowed</h1>
+    """
+
+    response.setstatus(405)
+    response.xml(basebody)
 
 def handleclient(self, client, action = baseresponse):
     request = httprequest()
     request.parserequest(client.recv(self.buffersize))
     response = httpresponse()
-    try:
-        (self.routes[request.method][request.path])(request,response)
-    except:
-        action(request,response)
+    
+    if request.method in self.methods:
+        try:
+            (self.routes[request.method][request.path])(request,response)
+        except:
+            action(request, response)
+            for regex in self.regexroutes[request.method].keys():
+                if re.search(regex[2:], request.path):
+                    (self.routes[request.method][regex])(request,response)
+                    break
+    else:
+        methodnotallowed(request, response)
     client.send(response.getresponse())
     client.close()
 
@@ -44,11 +60,12 @@ def serverhandler(self, port, action = baseresponse):
         clientthread.start()
 
 class httpserver:
-    def __init__(self, ip = '0.0.0.0', maxcon = 10, buffersize = 1024):
+    def __init__(self, ip = '0.0.0.0', maxcon = 10, buffersize = 1024, methods = methods):
         self.ip = ip
         self.header = {}
         self.maxcon = maxcon
         self.buffersize = buffersize
+        self.methods = methods
         self.routes = {
             'GET'    : {},
             'POST'   : {},
@@ -60,13 +77,18 @@ class httpserver:
             'TRACE'  : {},
             'PUT'    : {}
         }
+
+        self.regexroutes = self.routes
     
     def listen(self, action = baseresponse, port = 9000):
         serverthread = threading.Thread(target=serverhandler,args=(self,port,action,))
         serverthread.start()
 
     def get(self, path, action):
-        self.routes['GET'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['GET'][path] = action
+        else:
+            self.routes['GET'][path] = action
 
     def post(self, path, action):
         self.routes['POST'][path] = action

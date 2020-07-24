@@ -11,14 +11,43 @@ class httpresponse:
         self.protocol = b'HTTP/1.1'
         self.status = b'200'
         self.message = strtobyte(responses['200'])
-        self.header = {}
+        self.header = {'Content-Length':'0'}
         self.body = b''
 
     def setbody(self, body = ''):
         if type(body) == str:
             self.body = strtobyte(body)
-        else:
+        elif type(body) == bytes:
             self.body = body
+        
+        self.header['Content-Length'] = str(len(self.body))
+    
+    def text(self, text = ''):
+        if type(text) == str:
+            self.body = strtobyte(text)
+        elif type(text) == bytes:
+            self.body = text
+        
+        self.header['Content-Length'] = str(len(self.body))
+        self.header['Content-Type'] = 'text/plain'
+
+    def json(self, json = '{}'):
+        if type(json) == str:
+            self.body = strtobyte(json)
+        elif type(json) == bytes:
+            self.body = body
+        
+        self.header['Content-Length'] = str(len(self.body))
+        self.header['Content-Type'] = 'application/json'
+    
+    def xml(self, xml = ''):
+        if type(xml) == str:
+            self.body = strtobyte(xml)
+        elif type(xml) == bytes:
+            self.body = xml
+        
+        self.header['Content-Length'] = str(len(self.body))
+        self.header['Content-Type'] = 'text/html; text/xml'
 
     def setstatus(self, status, message=''):
         self.status = inttobyte(status)

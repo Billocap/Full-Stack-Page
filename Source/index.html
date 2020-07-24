@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="./Styles/main.css">
+
+        <style>
+            #side-menu a#home:not(.active) i,
+            #side-menu a#home:not(.active) span{
+                color: white;
+            }
+            
+            #side-menu a#home:not(.active):hover span,
+            #side-menu a#home:not(.active):hover i{
+                color: lightseagreen;
+            }
+            
+            #side-menu a#home.active{
+                background: teal;
+            }
+            
+            #side-menu a#home.active:hover{
+                background: lightseagreen;
+            }
+            
+            #side-menu a#search:not(.active) i,
+            #side-menu a#search:not(.active) span{
+                color: white;
+            }
+            
+            #side-menu a#search:not(.active):hover i,
+            #side-menu a#search:not(.active):hover span{
+                color: firebrick;
+            }
+            
+            #side-menu a#search.active{
+                color: black;
+                background: darkred;
+            }
+            
+            #side-menu a#search.active:hover{
+                background: firebrick;
+            }
+            
+            #side-menu a#share:not(.active) i,
+            #side-menu a#share:not(.active) span{
+                color: white;
+            }
+            
+            #side-menu a#share:not(.active):hover i,
+            #side-menu a#share:not(.active):hover span{
+                color: purple;
+            }
+            
+            #side-menu a#share.active{
+                background: indigo;
+            }
+            
+            #side-menu a#share.active:hover{
+                background: purple;
+            }
+            
+            #side-menu a#about:not(.active) i,
+            #side-menu a#about:not(.active) span{
+                color: white;
+            }
+            
+            #side-menu a#about:not(.active):hover i,
+            #side-menu a#about:not(.active):hover span{
+                color: forestgreen;
+            }
+            
+            #side-menu a#about.active{
+                background: darkgreen;
+            }
+            
+            #side-menu a#about.active:hover{
+                background: forestgreen;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="side-menu">
+            <a id="home" href="#" onclick="update('home')" class="active">
+                <i class="fa fa-home"></i>
+                <span>Home</span>
+            </a>
+            
+            <a id="search" href="#" onclick="update('search')">
+                <i class="fa fa-search"></i>
+                <span>Search</span>
+            </a>
+            
+            <a id="share" href="#" onclick="update('share')">
+                <i class="fa fa-share"></i>
+                <span>Share</span>
+            </a>
+            
+            <a id="about" href="#" onclick="update('about')">
+                <i class="fa fa-book"></i>
+                <span>About</span>
+            </a>
+        </div>
+        
+        <div id="content">
+        </div>
+        
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src='./Scripts/main.js'></script>
+    </body>
+</html>

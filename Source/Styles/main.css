@@ -1,0 +1,246 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: helvetica;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+#side-menu{
+    transition: width 0.5s, height 0.5s;
+    background: black;
+    display: flex;
+}
+
+#side-menu a{
+    transition: background 0.3s;
+    display: flex;
+    background: transparent;
+    text-decoration: none;
+}
+
+#side-menu a i{
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+    background: transparent;
+}
+
+#side-menu a span{
+    transition: color 0.3s;
+    font-size: 25px;
+    overflow: hidden;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+#side-menu:hover a span{
+    box-sizing: border-box;
+}
+
+#side-menu a.active{
+    transition: background 0.3s;
+}
+
+#content{
+    box-sizing: border-box;
+    text-align: justify;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#content #home-content,
+#content #search-content,
+#content #share-content,
+#content #about-content{
+    display: none;
+}
+
+#content h1{
+    font-size: 45px;
+    color: darkgray;
+    margin-bottom: 25px;
+}
+
+#content p{
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #aaa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+@media screen and (min-width: 700px){
+    #side-menu{
+        width: 70px;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    #side-menu:hover{
+        width: 190px;
+    }
+    
+    #side-menu a{
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    #side-menu a i{
+        font-size: 30px;
+        width: 70px;
+        height: 70px;
+    }
+    
+    #side-menu a span{
+        transition: width 0.5s;
+        width: 0px;
+    }
+    
+    #side-menu:hover a span{
+        width: 120px;
+    }
+
+    #side-menu a.active i,
+    #side-menu a.active span{
+        color: black;
+    }
+    
+    #side-menu a.active::after{
+        transition: border-color 0.3s;
+        content: "";
+        animation: show 1s;
+        border: solid transparent 35px;
+        margin-left: 0px;
+    }
+    
+    #side-menu a#home.active::after{
+        border-left-color: teal;
+    }
+
+    #side-menu a#home.active:hover::after{
+        border-left-color: lightseagreen;
+    }
+    
+    #side-menu a#search.active::after{
+        border-left-color: darkred;
+    }
+
+    #side-menu a#search.active:hover::after{
+        border-left-color: firebrick;
+    }
+    
+    #side-menu a#share.active::after{
+        border-left-color: indigo;
+    }
+
+    #side-menu a#share.active:hover::after{
+        border-left-color: purple;
+    }
+    
+    #side-menu a#about.active::after{
+        border-left-color: darkgreen;
+    }
+
+    #side-menu a#about.active:hover::after{
+        border-left-color: forestgreen;
+    }
+    
+    #content{
+        flex-shrink: 0;
+        height: 100vh;
+        width: calc(100% - 120px);
+        margin-left: 50px;
+        padding: 10px;
+        padding-right: 20px;
+    }
+    
+    #content h1{
+        margin-top: 35px;
+    }
+}
+
+@media screen and (max-width: 700px){
+    #side-menu{
+        width: 100%;
+        height: 70px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 0px;
+    }
+    
+    #side-menu:hover{
+        height: 100px;
+    }
+    
+    #side-menu a{
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    #side-menu a i{
+        font-size: 20px;
+        width: 70px;
+        height: 70px;
+    }
+    
+    #side-menu a span{
+        transition: height 0.5s;
+        font-size: 15px;
+        width: 70px;
+        height: 0px;
+        text-align: center;
+    }
+    
+    #side-menu:hover a span{
+        height:30px;
+    }
+    
+    
+    #side-menu a.active i,
+    #side-menu a.active span{
+        color: black;
+    }
+    
+    
+    #content{
+        width: 100%;
+        height: calc(100vh - 70px);
+        padding: 20px;
+        margin-bottom: 90px;
+    }
+}
+
+@keyframes show{
+    0%{
+        border-width: 0px;
+    }
+    
+    100%{
+        border-width: 35px;
+    }
+}
