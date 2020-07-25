@@ -40,8 +40,8 @@ def handleclient(self, client, action = baseresponse):
         except:
             action(request, response)
             for regex in self.regexroutes[request.method].keys():
-                if re.search(regex[2:], request.path):
-                    (self.routes[request.method][regex])(request,response)
+                if re.search(regex[1:], request.path):
+                    (self.regexroutes[request.method][regex])(request,response)
                     break
     else:
         methodnotallowed(request, response)
@@ -78,7 +78,17 @@ class httpserver:
             'PUT'    : {}
         }
 
-        self.regexroutes = self.routes
+        self.regexroutes = {
+            'GET'    : {},
+            'POST'   : {},
+            'PATCH'  : {},
+            'DELETE' : {},
+            'HEAD'   : {},
+            'CONNECT': {},
+            'OPTIONS': {},
+            'TRACE'  : {},
+            'PUT'    : {}
+        }
     
     def listen(self, action = baseresponse, port = 9000):
         serverthread = threading.Thread(target=serverhandler,args=(self,port,action,))

@@ -15,15 +15,12 @@ def mainscript(request, response):
     response.setbody(filehandler.readbytes('./Source/Scripts/main.js'))
 
 def getxml(request, response):
-    response.xml(filehandler.readbytes('./Source/Pages/'+request.path+'.html'))
+    response.xml(filehandler.readbytes('./Source/Pages'+request.path))
 
 server.get('/',root)
 server.get('/Styles/main.css',mainsheet)
 server.get('/Scripts/main.js',mainscript)
 
-server.get('/home',getxml)
-server.get('/about',getxml)
-server.get('/share',getxml)
-server.get('/search',getxml)
+server.get('r/(home|about|share|search)\.html',getxml)
 
 server.listen(port = 8080)

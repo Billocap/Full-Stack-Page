@@ -15,6 +15,7 @@ body{
     transition: width 0.5s, height 0.5s;
     background: black;
     display: flex;
+    justify-content: center;
 }
 
 #side-menu a{
@@ -49,18 +50,105 @@ body{
     transition: background 0.3s;
 }
 
+#side-menu a i,
+#side-menu a span{
+    color: white;
+}
+
+#side-menu a#home:not(.active):hover i,
+#side-menu a#home:not(.active):hover span {
+    color: teal;
+}
+
+#side-menu a#search:not(.active):hover i,
+#side-menu a#search:not(.active):hover span {
+    color: darkred;
+}
+
+#side-menu a#share:not(.active):hover i,
+#side-menu a#share:not(.active):hover span {
+    color: indigo;
+}
+
+#side-menu a#about:not(.active):hover i,
+#side-menu a#about:not(.active):hover span {
+    color: darkgreen;
+}
+
+#side-menu a#home.active {
+    background: teal;
+}
+
+#side-menu a#home.active:hover {
+    background: lightseagreen;
+}
+
+#side-menu a#search.active {
+    background: darkred;
+}
+
+#side-menu a#search.active:hover {
+    background: firebrick;
+}
+
+#side-menu a#share.active {
+    background: indigo;
+}
+
+#side-menu a#share.active:hover {
+    background: purple;
+}
+
+#side-menu a#about.active {
+    background: darkgreen;
+}
+
+#side-menu a#about.active:hover {
+    background: forestgreen;
+}
+
+#side-menu a.active i,
+#side-menu a.active span{
+    color: black;
+}
+
+#side-menu a#home.active::after{
+    border-left-color: teal;
+}
+
+#side-menu a#home.active:hover::after{
+    border-left-color: lightseagreen;
+}
+
+#side-menu a#search.active::after{
+    border-left-color: darkred;
+}
+
+#side-menu a#search.active:hover::after{
+    border-left-color: firebrick;
+}
+
+#side-menu a#share.active::after{
+    border-left-color: indigo;
+}
+
+#side-menu a#share.active:hover::after{
+    border-left-color: purple;
+}
+
+#side-menu a#about.active::after{
+    border-left-color: darkgreen;
+}
+
+#side-menu a#about.active:hover::after{
+    border-left-color: forestgreen;
+}
+
 #content{
     box-sizing: border-box;
     text-align: justify;
     overflow-y: scroll;
     overflow-x: hidden;
-}
-
-#content #home-content,
-#content #search-content,
-#content #share-content,
-#content #about-content{
-    display: none;
 }
 
 #content h1{
@@ -94,9 +182,8 @@ body{
 @media screen and (min-width: 700px){
     #side-menu{
         width: 70px;
-        height: 100vh;
+        height: 100%;
         flex-direction: column;
-        justify-content: center;
     }
     
     #side-menu:hover{
@@ -122,11 +209,6 @@ body{
     #side-menu:hover a span{
         width: 120px;
     }
-
-    #side-menu a.active i,
-    #side-menu a.active span{
-        color: black;
-    }
     
     #side-menu a.active::after{
         transition: border-color 0.3s;
@@ -134,38 +216,6 @@ body{
         animation: show 1s;
         border: solid transparent 35px;
         margin-left: 0px;
-    }
-    
-    #side-menu a#home.active::after{
-        border-left-color: teal;
-    }
-
-    #side-menu a#home.active:hover::after{
-        border-left-color: lightseagreen;
-    }
-    
-    #side-menu a#search.active::after{
-        border-left-color: darkred;
-    }
-
-    #side-menu a#search.active:hover::after{
-        border-left-color: firebrick;
-    }
-    
-    #side-menu a#share.active::after{
-        border-left-color: indigo;
-    }
-
-    #side-menu a#share.active:hover::after{
-        border-left-color: purple;
-    }
-    
-    #side-menu a#about.active::after{
-        border-left-color: darkgreen;
-    }
-
-    #side-menu a#about.active:hover::after{
-        border-left-color: forestgreen;
     }
     
     #content{
@@ -188,7 +238,6 @@ body{
         height: 70px;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
         position: fixed;
         bottom: 0px;
     }
@@ -220,16 +269,9 @@ body{
         height:30px;
     }
     
-    
-    #side-menu a.active i,
-    #side-menu a.active span{
-        color: black;
-    }
-    
-    
     #content{
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100% - 70px);
         padding: 20px;
         margin-bottom: 90px;
     }
