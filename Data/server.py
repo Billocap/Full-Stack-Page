@@ -1,5 +1,7 @@
+import os
+
 from Modules.filehandler import filehandler
-from Modules.httphandler.httpserver import httpserver
+from Modules.httpserver import httpserver
 
 server = httpserver()
 
@@ -23,4 +25,10 @@ server.get('/Scripts/main.js',mainscript)
 
 server.get('r/(home|about|share|search)\.html',getxml)
 
-server.listen(port = 8080)
+server.listen()
+
+while True:
+    command = input('_>')
+
+    if command == 'Exit':
+        os._exit(0)

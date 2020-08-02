@@ -14,7 +14,7 @@ class httpresponse:
         self.header = {'Content-Length':'0'}
         self.body = b''
 
-    def setbody(self, body = ''):
+    def setbody(self, body):
         if type(body) == str:
             self.body = strtobyte(body)
         elif type(body) == bytes:
@@ -22,7 +22,7 @@ class httpresponse:
         
         self.header['Content-Length'] = str(len(self.body))
     
-    def text(self, text = ''):
+    def text(self, text):
         if type(text) == str:
             self.body = strtobyte(text)
         elif type(text) == bytes:
@@ -31,7 +31,7 @@ class httpresponse:
         self.header['Content-Length'] = str(len(self.body))
         self.header['Content-Type'] = 'text/plain'
 
-    def json(self, json = '{}'):
+    def json(self, json):
         if type(json) == str:
             self.body = strtobyte(json)
         elif type(json) == bytes:
@@ -40,7 +40,7 @@ class httpresponse:
         self.header['Content-Length'] = str(len(self.body))
         self.header['Content-Type'] = 'application/json'
     
-    def xml(self, xml = ''):
+    def xml(self, xml):
         if type(xml) == str:
             self.body = strtobyte(xml)
         elif type(xml) == bytes:

@@ -33,6 +33,7 @@ def handleclient(self, client, action = baseresponse):
     request = httprequest()
     request.parserequest(client.recv(self.buffersize))
     response = httpresponse()
+    response.protocol = str.encode(request.protocol)
     
     if request.method in self.methods:
         try:
@@ -51,7 +52,7 @@ def handleclient(self, client, action = baseresponse):
 def serverhandler(self, port, action = baseresponse):
     server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     server.bind((self.ip,port))
-    server.listen()
+    server.listen(self.backlog)
 
     while True:
         client, addr = server.accept()
@@ -60,10 +61,10 @@ def serverhandler(self, port, action = baseresponse):
         clientthread.start()
 
 class httpserver:
-    def __init__(self, ip = '0.0.0.0', maxcon = 10, buffersize = 1024, methods = methods):
+    def __init__(self, ip = '0.0.0.0', backlog = 10, buffersize = 1024, methods = methods):
         self.ip = ip
         self.header = {}
-        self.maxcon = maxcon
+        self.backlog = backlog
         self.buffersize = buffersize
         self.methods = methods
         self.routes = {
@@ -90,7 +91,7 @@ class httpserver:
             'PUT'    : {}
         }
     
-    def listen(self, action = baseresponse, port = 9000):
+    def listen(self, action = baseresponse, port = 8080):
         serverthread = threading.Thread(target=serverhandler,args=(self,port,action,))
         serverthread.start()
 
@@ -101,25 +102,49 @@ class httpserver:
             self.routes['GET'][path] = action
 
     def post(self, path, action):
-        self.routes['POST'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['POST'][path] = action
+        else:
+            self.routes['POST'][path] = action
     
     def patch(self, path, action):
-        self.routes['PATCH'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['PATCH'][path] = action
+        else:
+            self.routes['PATCH'][path] = action
 
     def delete(self, path, action):
-        self.routes['DELETE'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['DELETE'][path] = action
+        else:
+            self.routes['DELETE'][path] = action
 
     def head(self, path, action):
-        self.routes['HEAD'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['HEAD'][path] = action
+        else:
+            self.routes['HEAD'][path] = action
 
     def connect(self, path, action):
-        self.routes['CONNECT'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['CONNECT'][path] = action
+        else:
+            self.routes['CONNECT'][path] = action
 
     def options(self, path, action):
-        self.routes['OPTIONS'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['OPTIONS'][path] = action
+        else:
+            self.routes['OPTIONS'][path] = action
 
     def trace(self, path, action):
-        self.routes['TRACE'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['TRACE'][path] = action
+        else:
+            self.routes['TRACE'][path] = action
 
     def put(self, path, action):
-        self.routes['PUT'][path] = action
+        if path[0] == 'r':
+            self.regexroutes['PUT'][path] = action
+        else:
+            self.routes['PUT'][path] = action

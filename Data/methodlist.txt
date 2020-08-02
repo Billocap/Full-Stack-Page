@@ -1,0 +1,84 @@
+httpserver([ip[,backlog[,buffersize[,methods]]]])
+	Creates a new HTTP Server object.
+	- ip(str) : Defines the ip the Server is bond to
+		default: '0.0.0.0'
+	- backlog(int) : The max number of connections the server accepts
+		default: 10
+	- buffersize(int) : Amount of bytes de Server recieves from the client
+		default: 1024
+	- methods(list<str>): A list of the methods the Server accepts
+		default: ['GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH']
+
+httpserver.listen([action[,port]])
+	Starts the Server listening on port the especified port
+	- action(function) : Function to be executed when a connection is accepted
+		default: Sends a simple page informing the route in not defined
+	- port(int) : The port to listen for connections
+		default: 8080
+
+httpserver.get(path, action)
+	Sets a GET Request route
+	- action(str) : The route to be checked, puts r before the route to use RegEx
+		default: ''
+	- action(function) : Function to be executed when a connection is accepted
+		default: Sends a simple page informing the route in not defined
+
+httpserver.post(path, action)
+	Sets a POST Request route
+	- action(str) : The route to be checked, puts r before the route to use RegEx
+		default: ''
+	- action(function) : Function to be executed when a connection is accepted
+		default: Sends a simple page informing the route in not defined
+
+httpserver.patch(path, action)
+	Sets a PATCH Request route
+	- action(str) : The route to be checked, puts r before the route to use RegEx
+		default: ''
+	- action(function) : Function to be executed when a connection is accepted
+		default: Sends a simple page informing the route in not defined
+
+httpserver.delete(path, action)
+	Sets a DELETE Request route
+	- action(str) : The route to be checked, puts r before the route to use RegEx
+		default: ''
+	- action(function) : Function to be executed when a connection is accepted
+		default: Sends a simple page informing the route in not defined
+
+httpserver.head(path, action)
+httpserver.connect(path, action)
+httpserver.options(path, action)
+httpserver.trace(path, action)
+httpserver.put(path, action)
+
+httprequest()
+httprequest.parserequest(request)
+httprequest.method
+httprequest.path
+httprequest.mimetype
+httprequest.query
+httprequest.index
+httprequest.protocol
+httprequest.header
+httprequest.body
+
+httpresponse()
+httpresponse.setbody(body)
+httpresponse.text(text)
+httpresponse.json(json)
+httpresponse.xml(xml)
+httpresponse.setstatus(status[,message])
+httpresponse.setheader(header)
+httpresponse.setfullheader(status[,message[,header]])
+httpresponse.getresponse()
+httpresponse.getstrresponse()
+
+methods
+mimetypes[extension]
+responses[statuscode]
+
+filehandler.read(path)
+filehandler.write(path)
+filehandler.append(path)
+filehandler.readbytes(path)
+filehandler.writebytes(path)
+filehandler.appendbytes(path)

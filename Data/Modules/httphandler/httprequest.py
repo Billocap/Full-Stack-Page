@@ -1,4 +1,5 @@
 from Modules.httphandler.information.methods import methods
+from Modules.httphandler.information.mimetypes import mimetypes
 
 def parseInformation(query,partition,separator):
     c = 0
@@ -43,6 +44,7 @@ class httprequest:
     def __init__(self):
         self.method = 'GET'
         self.path = ''
+        self.mimetype = ''
         self.query = {}
         self.index = ''
         self.protocol = ''
@@ -74,6 +76,10 @@ class httprequest:
                         parse += request[n]
                     n += 1
                 self.path = parse
+                try:
+                    self.mimetype = mimetypes[parse.partition('.')[2]]
+                except:
+                    pass
                 parse = ''
                 continue
             elif char == '?':
