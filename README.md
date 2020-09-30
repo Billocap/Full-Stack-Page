@@ -27,5 +27,3 @@ This is just a simple project so most of it doesn't use to complicated languages
 #### Programs
 - [Visual Studio Code](https://code.visualstudio.com/) - Used to write the code.
 - [Insomnia](https://insomnia.rest/) - Used to test the routes.
-
-### Development
