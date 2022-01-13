@@ -1,4 +1,4 @@
-# Personal SPA Page (Work in Progress)
+# Personal SPA Page
 A simple project containing a Python 3 server and a plain CSS and JavaScript responsive SPA, made to understand Full Stack development.
 
 ## Getting Started !
